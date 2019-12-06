@@ -1,1 +1,1 @@
-web: gunicorn sand_server:APP --log-file -
+web: gunicorn http_test_dane:APP --log-file -
