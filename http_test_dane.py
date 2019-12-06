@@ -60,6 +60,7 @@ MESSAGES = {
 APP = Flask(__name__)
 APP.debug = True
 APP.url_map.add(Rule('/pc', endpoint='pc'))
+APP.url_map.add(Rule('/metrics', endpoint='metrics'))
 
 @APP.endpoint('pc')
 def pc():
@@ -69,6 +70,18 @@ def pc():
     if request.method == "POST":
         logging.info("Received POST HTTP method")
         return Response(MESSAGES["DaneCapabilitiesPC"], 200, mimetype='application/sand+xml')
+    else:
+        logging.info("Received %s HTTP method", request.method)
+        return ("", 200)
+
+@APP.endpoint('metrics')
+def pc():
+    """
+    Receives metrics from DASH client.
+    """
+    if request.method == "POST":
+        logging.info("Received POST HTTP method")
+        return ("OK", 200)
     else:
         logging.info("Received %s HTTP method", request.method)
         return ("", 200)
